@@ -66,4 +66,4 @@ jobs:
         app-name: 'turbohtml'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_77d882ab5c9443789bb4ef7fae193bdb }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_e35269fb30f64f48be205de1be5ec0a3 }}/turbo-html:${{ sha }}'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_e35269fb30f64f48be205de1be5ec0a3 }}/turbo-html:latest'
