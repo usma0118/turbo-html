@@ -31,7 +31,7 @@ jobs:
       with:
         # list of Docker images to use as base name for tags
         images: |
-          secrets/turbo-html
+          ${{ secrets.AzureAppService_ContainerUsername_e35269fb30f64f48be205de1be5ec0a3 }}/turbo-html
         # generate Docker tags based on the following events/attributes
         tags: |
           type=semver,pattern={{version}}
@@ -39,13 +39,15 @@ jobs:
           type=semver,pattern={{major}}
           type=ref,event=tag
           type=sha
+          type=sha,format=long
         flavor: |
-          latest=auto
+          latest=true
 
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
+        context: .      
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
@@ -66,4 +68,4 @@ jobs:
         app-name: 'turbohtml'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_77d882ab5c9443789bb4ef7fae193bdb }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_e35269fb30f64f48be205de1be5ec0a3 }}/turbo-html:latest'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_e35269fb30f64f48be205de1be5ec0a3 }}/turbo-html:${{ github.sha }}'
