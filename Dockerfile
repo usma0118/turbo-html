@@ -1,4 +1,3 @@
-FROM nginx:alpine
-copy source/ /usr/share/nginx/html
+FROM nginx:1.23
+copy source /usr/share/nginx/html
 
-EXPOSE 8080
